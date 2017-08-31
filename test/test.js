@@ -4732,6 +4732,16 @@
 
       assert.deepEqual(actual, expected);
     });
+
+    QUnit.test('should return first appropriate default value', function(assert) {
+      assert.expect(1);
+
+      var expected = 1;
+
+      var actual = _.defaultTo(null, NaN, 1, undefined);
+
+      assert.equal(actual, expected);
+    })
   }());
 
   /*--------------------------------------------------------------------------*/
