@@ -15370,15 +15370,15 @@
 
     /**
      * Checks `value` to determine whether a default value should be returned in
-     * its place. The `defaultValue` is returned if `value` is `NaN`, `null`,
-     * or `undefined`.
+     * its place. The first `defaultValues` argument that is not `NaN`, `null`,
+     * or `undefined` is returned.
      *
      * @static
      * @memberOf _
      * @since 4.14.0
      * @category Util
      * @param {*} value The value to check.
-     * @param {*} defaultValue The default value.
+     * @param {*} [...defaultValues] The default value.
      * @returns {*} Returns the resolved value.
      * @example
      *
@@ -15388,8 +15388,14 @@
      * _.defaultTo(undefined, 10);
      * // => 10
      */
-    function defaultTo(value, defaultValue) {
-      return (value == null || value !== value) ? defaultValue : value;
+    function defaultTo() {
+      for (var index in arguments) {
+        var defaultValue = arguments[index];
+        if (defaultValue != null && defaultValue === defaultValue) {
+          return defaultValue;
+        }
+      }
+      return undefined;
     }
 
     /**
